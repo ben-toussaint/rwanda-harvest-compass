@@ -36,7 +36,7 @@ function Planner() {
       <h1 className="font-display text-3xl font-semibold">Planner dashboard · maize</h1>
       <section className="rounded-lg border border-border bg-card p-4">
         <h2 className="mb-2 text-sm font-semibold">Median yield and observed gap to p90 (t/ha)</h2>
-        <div className="h-72"><ResponsiveContainer>
+        <div className="h-72"><ResponsiveContainer width="100%" height="100%">
           <BarChart data={rows}><CartesianGrid strokeDasharray="3 3" stroke="var(--border)" /><XAxis dataKey="district" /><YAxis />
             <Tooltip formatter={(v: number) => v.toFixed(2)} />
             <Bar dataKey="median" stackId="a" fill="var(--primary)" name="Median" /><Bar dataKey="gap" stackId="a" fill="var(--accent)" name="Gap to p90" />

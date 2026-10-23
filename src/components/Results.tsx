@@ -61,7 +61,7 @@ export function Results({ district, province, crop, areaHa, target, upi }: { dis
 
       <Card title="Where your target sits among comparable observations">
         <div className="h-48">
-          <ResponsiveContainer>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={[{ k: "p25", v: s.p25 }, { k: "median", v: s.median }, { k: "p75", v: s.p75 }, { k: "p90", v: s.p90 }]}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
               <XAxis dataKey="k" /><YAxis unit=" t" /><Tooltip formatter={(v: number) => `${f1(v)} t/ha`} />
