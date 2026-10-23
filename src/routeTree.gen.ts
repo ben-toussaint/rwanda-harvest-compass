@@ -10,11 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FarmersRouteImport } from './routes/farmers'
+import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as VisitRouteImport } from './routes/visit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmersRoute = FarmersRouteImport.update({
+  id: '/farmers',
+  path: '/farmers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeedbackRoute = FeedbackRouteImport.update({
+  id: '/feedback',
+  path: '/feedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlannerRoute = PlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VisitRoute = VisitRouteImport.update({
@@ -25,27 +43,39 @@ const VisitRoute = VisitRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/farmers': typeof FarmersRoute
+  '/feedback': typeof FeedbackRoute
+  '/planner': typeof PlannerRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/farmers': typeof FarmersRoute
+  '/feedback': typeof FeedbackRoute
+  '/planner': typeof PlannerRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/farmers': typeof FarmersRoute
+  '/feedback': typeof FeedbackRoute
+  '/planner': typeof PlannerRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/visit'
+  fullPaths: '/' | '/farmers' | '/feedback' | '/planner' | '/visit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/visit'
-  id: '__root__' | '/' | '/visit'
+  to: '/' | '/farmers' | '/feedback' | '/planner' | '/visit'
+  id: '__root__' | '/' | '/farmers' | '/feedback' | '/planner' | '/visit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FarmersRoute: typeof FarmersRoute
+  FeedbackRoute: typeof FeedbackRoute
+  PlannerRoute: typeof PlannerRoute
   VisitRoute: typeof VisitRoute
 }
 
@@ -56,6 +86,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farmers': {
+      id: '/farmers'
+      path: '/farmers'
+      fullPath: '/farmers'
+      preLoaderRoute: typeof FarmersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/feedback': {
+      id: '/feedback'
+      path: '/feedback'
+      fullPath: '/feedback'
+      preLoaderRoute: typeof FeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planner': {
+      id: '/planner'
+      path: '/planner'
+      fullPath: '/planner'
+      preLoaderRoute: typeof PlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/visit': {
@@ -70,6 +121,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FarmersRoute: FarmersRoute,
+  FeedbackRoute: FeedbackRoute,
+  PlannerRoute: PlannerRoute,
   VisitRoute: VisitRoute,
 }
 export const routeTree = rootRouteImport
