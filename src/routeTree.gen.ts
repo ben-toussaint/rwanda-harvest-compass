@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as FarmersRouteImport } from './routes/farmers'
 import { Route as FeedbackRouteImport } from './routes/feedback'
+import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as VisitRouteImport } from './routes/visit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FarmersRoute = FarmersRouteImport.update({
@@ -28,6 +35,11 @@ const FarmersRoute = FarmersRouteImport.update({
 const FeedbackRoute = FeedbackRouteImport.update({
   id: '/feedback',
   path: '/feedback',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlannerRoute = PlannerRouteImport.update({
@@ -43,38 +55,68 @@ const VisitRoute = VisitRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/farmers': typeof FarmersRoute
   '/feedback': typeof FeedbackRoute
+  '/methodology': typeof MethodologyRoute
   '/planner': typeof PlannerRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/farmers': typeof FarmersRoute
   '/feedback': typeof FeedbackRoute
+  '/methodology': typeof MethodologyRoute
   '/planner': typeof PlannerRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/farmers': typeof FarmersRoute
   '/feedback': typeof FeedbackRoute
+  '/methodology': typeof MethodologyRoute
   '/planner': typeof PlannerRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/farmers' | '/feedback' | '/planner' | '/visit'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/farmers'
+    | '/feedback'
+    | '/methodology'
+    | '/planner'
+    | '/visit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/farmers' | '/feedback' | '/planner' | '/visit'
-  id: '__root__' | '/' | '/farmers' | '/feedback' | '/planner' | '/visit'
+  to:
+    | '/'
+    | '/admin'
+    | '/farmers'
+    | '/feedback'
+    | '/methodology'
+    | '/planner'
+    | '/visit'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/farmers'
+    | '/feedback'
+    | '/methodology'
+    | '/planner'
+    | '/visit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   FarmersRoute: typeof FarmersRoute
   FeedbackRoute: typeof FeedbackRoute
+  MethodologyRoute: typeof MethodologyRoute
   PlannerRoute: typeof PlannerRoute
   VisitRoute: typeof VisitRoute
 }
@@ -86,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/farmers': {
@@ -100,6 +149,13 @@ declare module '@tanstack/react-router' {
       path: '/feedback'
       fullPath: '/feedback'
       preLoaderRoute: typeof FeedbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planner': {
@@ -121,8 +177,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   FarmersRoute: FarmersRoute,
   FeedbackRoute: FeedbackRoute,
+  MethodologyRoute: MethodologyRoute,
   PlannerRoute: PlannerRoute,
   VisitRoute: VisitRoute,
 }
